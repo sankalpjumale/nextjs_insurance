@@ -23,7 +23,7 @@ if(!cached) { //when run first time it initialise cached with empty values
     }
 }
 
-async function dbConnect() {
+export async function dbConnect() {
 
     //if it connect then return  
     if(cached.conn) return cached.conn
