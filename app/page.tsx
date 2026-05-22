@@ -18,14 +18,17 @@ export default function Home() {
   useEffect(() => {
     async function fetchTypes() {
       try {
-        const response = await fetch("/api/insurence-types")
+        const response = await fetch("/api/insurence")
         const data = await response.json()
+        setTypes(data)
+        // console.log("api response: ", data)
       } catch (error) {
         console.error("Failed to fetch insurence types", error)
       } finally {
         setLoading(false)
       }
     }
+    fetchTypes()
   }, [])
 
   return (

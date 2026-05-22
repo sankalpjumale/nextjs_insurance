@@ -1,45 +1,44 @@
 import mongoose from "mongoose"
+import { autoSeed } from "./seed"
 
-const MONGODB_URI = process.env.MONGODB_URI! //! means this value exists
+const MONGODB_URI = process.env.MONGODB_URI!
 
-if(!MONGODB_URI) {
+if (!MONGODB_URI) {
     console.error("Please add MONGODB_URI")
 }
 
 declare global {
-    var mongoose: {
-        conn: typeof import("mongoose") | null //hold active connection once establish
-        promise: Promise<typeof import("mongoose")> | null //hold in-progress connection promise
+    var _mongooseCache: {
+        conn: typeof mongoose | null
+        promise: Promise<typeof mongoose> | null
     }
 }
 
-let cached = global.mongoose //use global cache if it already exists otherwise start with undefined and global persists last hot reload in next.js regular varaibale donot last
-
-
-if(!cached) { //when run first time it initialise cached with empty values
-    cached = global.mongoose = {
-        conn: null,
-        promise: null
-    }
+if (!global._mongooseCache) {
+    global._mongooseCache = { conn: null, promise: null }
 }
+
+const cached = global._mongooseCache
 
 export async function dbConnect() {
 
-    //if it connect then return  
-    if(cached.conn) return cached.conn
+    // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
+    // if mongoose is already connected, return immediately
+    if (mongoose.connection.readyState === 1) return mongoose
 
-    //if no connection in progress then start one
-    if(!cached.promise) {
-        //mongoose.connect retunr promise - parallel calls share same attempt
-        cached.promise = mongoose
-            .connect(MONGODB_URI)
-            .then((mongoose) => mongoose) //take mongoose connection and return it as it is
+    // connection dropped — reset cache so we reconnect fresh
+    if (mongoose.connection.readyState === 0) {
+        cached.conn = null
+        cached.promise = null
     }
 
-    //await connection promise, either one just started or one already connect
+    if (!cached.promise) {
+        cached.promise = mongoose.connect(MONGODB_URI).then(() => mongoose)
+    }
+
     cached.conn = await cached.promise
+
+    // await autoSeed()
 
     return cached.conn
 }
-
-//singleton caching

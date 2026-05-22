@@ -18,7 +18,7 @@ const InsurenceSchema = new Schema<IInsurenceType>(
             type: String,
             required: true
         }
-    }, {timestamps: true}
+    }, {timestamps: true, collection: "insurancetypes"}
 )
 
 export const InsurenceType = models.InsurenceType || model<IInsurenceType>       ("InsurenceType", InsurenceSchema)
