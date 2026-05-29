@@ -3,11 +3,12 @@ import { getPolicyById } from "@/lib/actions/policy.actions"
 import { notFound } from "next/navigation"
 
 interface PolicyDetailPageProps {
-    params: {id: string}
+    params: Promise<{id: string}>
 }
 
 export default async function PolicyDetailPage({params}: PolicyDetailPageProps) {
-    const policy = await getPolicyById(params.id)
-    if(!policy) return notFound
+    const {id} = await params
+    const policy = await getPolicyById(id)
+    if(!policy) notFound()
     return <PolicyClientDetail policy={policy} />
 }
