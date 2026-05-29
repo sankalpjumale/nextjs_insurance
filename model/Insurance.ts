@@ -2,13 +2,13 @@ import { Schema, model, models } from "mongoose"
 
 
 
-export interface IInsurenceType {
+export interface IInsuranceType {
     _id: string
     name: string
     description: string
 }
 
-const InsurenceSchema = new Schema<IInsurenceType>(
+const InsuranceSchema = new Schema<IInsuranceType>(
     {
         name: {
             type: String,
@@ -21,4 +21,4 @@ const InsurenceSchema = new Schema<IInsurenceType>(
     }, {timestamps: true, collection: "insurancetypes"}
 )
 
-export const InsurenceType = models.InsurenceType || model<IInsurenceType>       ("InsurenceType", InsurenceSchema)
+export const InsuranceType = models.InsuranceType || model<IInsuranceType>("InsuranceType", InsuranceSchema)

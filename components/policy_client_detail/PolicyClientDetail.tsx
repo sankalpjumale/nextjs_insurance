@@ -44,7 +44,7 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
         health: "bg-emerald-100 text-emerald-800",
         life: "bg-blue-100 text-blue-800",
         auto: "bg-orange-100 text-orange-800",
-        home: "bg-purple-100 text-pruple-800"
+        home: "bg-purple-100 text-purple-800"
     }
 
     const badgeClass = 
