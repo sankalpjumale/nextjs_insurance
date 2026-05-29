@@ -94,7 +94,7 @@ export default async function HomePage() {
                 >
 
                   {/* card top accent */}
-                  <div className="h-1.5 w-full bg-gradient-t-r from-indigo-400 via-violet-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
+                  <div className="h-1.5 w-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
 
                   <div className="p-6 flex flex-col flex-1">
                     {/* category badge */}
