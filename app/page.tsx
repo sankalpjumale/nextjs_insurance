@@ -1,6 +1,16 @@
 import Link from "next/link";
 import { Shield, ArrowRight, Star, TrendingUp } from "lucide-react";
 
+interface Policy {
+  _id: string
+  name: string
+  provider: string
+  category?: string
+  price?: number
+  rating?: number
+  feature?: string[]
+}
+
 async function getPolicies() {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/policies`, {
@@ -8,8 +18,8 @@ async function getPolicies() {
     })
     if(!response.ok) return []
     const data = await response.json()
-    return data.policies || []
-  } catch (error) {
+    return data.data || []
+  } catch {
     return []
   }
 }
@@ -72,7 +82,7 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {policies.map((policy: any) => {
+            {policies.map((policy: Policy) => {
               const cate = categoryColors[policy.category?.toLowerCase()] ?? categoryColors.default
               return (
                 <Link
