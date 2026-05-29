@@ -21,7 +21,7 @@ interface Policy {
     category: string
     price: number
     coverage: number
-    feature: string[]
+    features: string[]
     description: string
     isActive: boolean
 }
@@ -240,7 +240,7 @@ export default function ComparePage() {
  
     // collect all unique features across selected policies
     const allFeatures = Array.from(
-        new Set(selected.flatMap((p) => p.feature ?? []))
+        new Set(selected.flatMap((p) => p.features ?? []))
     )
  
     return (
@@ -403,7 +403,7 @@ export default function ComparePage() {
                                                         key={fi}
                                                         label={feature}
                                                         values={slots.map((s) =>
-                                                            s ? s.feature?.includes(feature) ?? false : null
+                                                            s ? s.features?.includes(feature) ?? false : null
                                                         )}
                                                         highlight={fi % 2 === 0}
                                                     />

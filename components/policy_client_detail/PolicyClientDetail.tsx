@@ -10,7 +10,7 @@ interface Policy {
     category: string
     price: number
     coverage: number
-    feature: string[]
+    features: string[]
     description?: string
     duration?: string
     claimSettlementRatio?: number
@@ -129,7 +129,7 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
                     <span>✦</span> What's Covered
                 </h2>
                 <ul className="space-y-2.5">
-                    {policy.feature.map((feature, i) => (
+                    {policy.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
                         <span className="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-xs font-bold">
                         ✓

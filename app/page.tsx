@@ -8,7 +8,7 @@ interface Policy {
   category?: string
   price?: number
   rating?: number
-  feature?: string[]
+  features?: string[]
 }
 
 async function getPolicies() {
@@ -83,7 +83,9 @@ export default async function HomePage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {policies.map((policy: Policy) => {
-              const cate = categoryColors[policy.category?.toLowerCase()] ?? categoryColors.default
+              const category = policy.category?.toLowerCase() ?? "default"
+              const cate = categoryColors[category] ?? categoryColors.default
+              const features = policy.features ?? []
               return (
                 <Link
                   key={policy._id}
@@ -114,16 +116,16 @@ export default async function HomePage() {
                     <p className="text-sm text-stone-400 font-medium mb-4">{policy.provider}</p>
 
                     {/* feature */}
-                    {policy.feature?.length > 0 && (
+                    {features.length > 0 && (
                       <ul className="space-y-1.5 mb-6 flex-1">
-                        {policy.feature.slice(0,3).map((f: string, i: number) => (
+                        {features.slice(0,3).map((f: string, i: number) => (
                           <li key={i} className="flex items-center gap-2 text-sm text-stone-500">
                             <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-300 shrink-0"/>
                             {f}
                           </li>
                         ))}
-                        {policy.feature.length > 3 && (
-                          <li className="text-xs text-stone-400 pl-3.5">+{policy.feature.length - 3} more</li>
+                        {features.length > 3 && (
+                          <li className="text-xs text-stone-400 pl-3.5">+{features.length - 3} more</li>
                         )}
                       </ul>
                     )}
