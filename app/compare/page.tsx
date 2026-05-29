@@ -36,7 +36,7 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
  
 const MAX_COMPARE = 4
  
-// ─── Policy Selector Dropdown ───────────────────────────────────────────────
+// Policy selector dropdown
 function PolicySelector({
     allPolicies,
     selected,
@@ -87,7 +87,7 @@ function PolicySelector({
  
                 <div className="flex items-end gap-1 mt-auto">
                     <span className="text-xl font-bold text-stone-900">
-                        ₹{selected.price?.toLocaleString("en-IN")}
+                        Rs. {selected.price?.toLocaleString("en-IN")}
                     </span>
                     <span className="text-xs text-stone-400 mb-0.5">/yr</span>
                 </div>
@@ -134,7 +134,7 @@ function PolicySelector({
                                             <p className="text-xs text-stone-400">{p.provider}</p>
                                         </div>
                                         <span className="text-sm font-bold text-stone-700">
-                                            ₹{p.price?.toLocaleString("en-IN")}
+                                            Rs. {p.price?.toLocaleString("en-IN")}
                                         </span>
                                     </button>
                                 </li>
@@ -147,7 +147,7 @@ function PolicySelector({
     )
 }
  
-// ─── Comparison Row ──────────────────────────────────────────────────────────
+// Comparison row
 function CompareRow({
     label,
     values,
@@ -173,21 +173,21 @@ function CompareRow({
                     ) : val !== null && val !== undefined ? (
                         String(val)
                     ) : (
-                        <span className="text-stone-200">—</span>
+                        <span className="text-stone-200">-</span>
                     )}
                 </td>
             ))}
             {/* empty cols if less than MAX_COMPARE selected */}
             {Array.from({ length: MAX_COMPARE - values.length }).map((_, i) => (
                 <td key={`empty-${i}`} className="px-5 py-4 text-center text-stone-100">
-                    —
+                    -
                 </td>
             ))}
         </tr>
     )
 }
  
-// ─── Main Page ───────────────────────────────────────────────────────────────
+// Main page
 export default function ComparePage() {
     const [allPolicies, setAllPolicies] = useState<Policy[]>([])
     const [slots, setSlots] = useState<(Policy | null)[]>([null, null])
@@ -289,7 +289,7 @@ export default function ComparePage() {
                 {loading ? (
                     <div className="flex items-center justify-center py-32 gap-3 text-stone-400">
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        <span className="text-sm">Loading policies…</span>
+                        <span className="text-sm">Loading policies...</span>
                     </div>
                 ) : error ? (
                     <div className="text-center py-32 text-red-400 text-sm">{error}</div>
@@ -365,13 +365,13 @@ export default function ComparePage() {
                                         <CompareRow
                                             label="Price / yr"
                                             values={slots.map((s) =>
-                                                s ? `₹${s.price?.toLocaleString("en-IN")}` : null
+                                                s ? `Rs. ${s.price?.toLocaleString("en-IN")}` : null
                                             )}
                                         />
                                         <CompareRow
                                             label="Coverage"
                                             values={slots.map((s) =>
-                                                s ? `₹${s.coverage?.toLocaleString("en-IN")}` : null
+                                                s ? `Rs. ${s.coverage?.toLocaleString("en-IN")}` : null
                                             )}
                                             highlight
                                         />

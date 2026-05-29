@@ -62,7 +62,7 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
             href="/compare"
             className="bg-[#e0c97f] text-[#1a1a2e] px-4 py-1.5 rounded-full font-semibold hover:brightness-110 transition"
             >
-            Compare Policies →
+            Compare Policies
             </Link>
         </div>
     
@@ -77,7 +77,7 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
             </div>
     
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* left — main detail card */}
+            {/* left - main detail card */}
             <div className="lg:col-span-2 space-y-5">
                 {/* header card */}
                 <div className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
@@ -96,7 +96,7 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
                     <div className="text-right">
                     <p className="text-xs text-gray-400 uppercase tracking-wider">Premium</p>
                     <p className="text-4xl font-black text-[#1a1a2e]">
-                        ₹{policy.price.toLocaleString()}
+                        Rs. {policy.price.toLocaleString()}
                     </p>
                     <p className="text-xs text-gray-400">per year</p>
                     </div>
@@ -111,28 +111,28 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
     
                 {/* key stats */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <StatCard label="Coverage" value={`₹${(policy.coverage / 100000).toFixed(0)}L`} icon="🛡️" />
+                <StatCard label="Coverage" value={`Rs. ${(policy.coverage / 100000).toFixed(0)}L`} icon="Shield" />
                 {policy.duration && (
-                    <StatCard label="Duration" value={policy.duration} icon="📅" />
+                    <StatCard label="Duration" value={policy.duration} icon="Term" />
                 )}
                 {policy.claimSettlementRatio !== undefined && (
-                    <StatCard label="Claim Ratio" value={`${policy.claimSettlementRatio}%`} icon="✅" />
+                    <StatCard label="Claim Ratio" value={`${policy.claimSettlementRatio}%`} icon="OK" />
                 )}
                 {policy.minAge !== undefined && policy.maxAge !== undefined && (
-                    <StatCard label="Age Range" value={`${policy.minAge}–${policy.maxAge} yrs`} icon="👤" />
+                    <StatCard label="Age Range" value={`${policy.minAge}-${policy.maxAge} yrs`} icon="Age" />
                 )}
                 </div>
     
                 {/* features */}
                 <div className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100">
                 <h2 className="text-base font-bold text-[#1a1a2e] mb-4 flex items-center gap-2">
-                    <span>✦</span> What's Covered
+                    <span>*</span> Coverage Details
                 </h2>
                 <ul className="space-y-2.5">
                     {policy.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
                         <span className="mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-xs font-bold">
-                        ✓
+                        OK
                         </span>
                         {feature}
                     </li>
@@ -141,14 +141,14 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
                 </div>
             </div>
     
-            {/* right — action card */}
+            {/* right - action card */}
             <div className="space-y-5">
                 <div className="bg-[#1a1a2e] text-white rounded-2xl p-6 shadow-md sticky top-6">
                 <p className="text-[#e0c97f] text-xs uppercase tracking-widest font-semibold mb-1">
                     Annual Premium
                 </p>
                 <p className="text-5xl font-black mb-1">
-                    ₹{policy.price.toLocaleString()}
+                    Rs. {policy.price.toLocaleString()}
                 </p>
                 <p className="text-xs text-gray-400 mb-6">Inclusive of GST</p>
     
@@ -160,14 +160,14 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
                         : "bg-[#e0c97f] text-[#1a1a2e] hover:brightness-110"
                     }`}
                 >
-                    {added ? "✓ Added to Compare" : "+ Add to Compare"}
+                    {added ? "Added to Compare" : "+ Add to Compare"}
                 </button>
     
                 <Link
                     href="/compare"
                     className="block w-full text-center py-3 rounded-xl border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition"
                 >
-                    View Comparison →
+                    View Comparison
                 </Link>
     
                 <div className="mt-6 pt-5 border-t border-white/10 space-y-3">
@@ -194,9 +194,9 @@ export default function PolicyClientDetail({policy}: {policy: Policy}) {
                 <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center space-y-3">
                 <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Why Compare?</p>
                 {[
-                    "✦ 100% unbiased data",
-                    "✦ Real premium quotes",
-                    "✦ Feature-by-feature breakdown",
+                    "* 100% unbiased data",
+                    "* Real premium quotes",
+                    "* Feature-by-feature breakdown",
                 ].map((item) => (
                     <p key={item} className="text-xs text-gray-600">{item}</p>
                 ))}

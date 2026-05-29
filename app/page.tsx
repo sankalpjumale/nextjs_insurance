@@ -133,7 +133,7 @@ export default async function HomePage() {
                     {/* price + CTA */}
                     <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
                       <div>
-                        <span className="text-2xl font-bold text-stone-900">₹{policy.price?.toLocaleString("en-IN")}</span>
+                        <span className="text-2xl font-bold text-stone-900">Rs. {policy.price?.toLocaleString("en-IN")}</span>
                         <span className="text-xs text-stone-400 ml-1">/yr</span>
                       </div>
 
