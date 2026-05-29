@@ -90,7 +90,7 @@ export default async function HomePage() {
                 <Link
                   key={policy._id}
                   href={`/policy/${policy._id}`}
-                  className="group bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex-flex-col"
+                  className="group bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
                 >
 
                   {/* card top accent */}
