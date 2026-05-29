@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Shield, ArrowRight, Star, TrendingUp } from "lucide-react";
+import { dbConnect } from "@/lib/dbConnect";
+import Policy from "@/model/Policy";
 
-interface Policy {
+interface PolicyCard {
   _id: string
   name: string
   provider: string
@@ -11,14 +13,11 @@ interface Policy {
   features?: string[]
 }
 
-async function getPolicies() {
+async function getPolicies(): Promise<PolicyCard[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/policies`, {
-      cache: "no-store"
-    })
-    if(!response.ok) return []
-    const data = await response.json()
-    return data.data || []
+    await dbConnect()
+    const policies = await Policy.find({}).sort({createdAt: -1}).lean()
+    return JSON.parse(JSON.stringify(policies))
   } catch {
     return []
   }
@@ -82,7 +81,7 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {policies.map((policy: Policy) => {
+            {policies.map((policy: PolicyCard) => {
               const category = policy.category?.toLowerCase() ?? "default"
               const cate = categoryColors[category] ?? categoryColors.default
               const features = policy.features ?? []

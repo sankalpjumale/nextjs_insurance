@@ -197,9 +197,7 @@ export default function ComparePage() {
     useEffect(() => {
         async function fetchPolicies() {
             try {
-                const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_BASE_URL}/api/policies`
-                )
+                const res = await fetch("/api/policies")
                 const data = await res.json()
                 setAllPolicies(data.data || [])
             } catch {
