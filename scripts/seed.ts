@@ -87,7 +87,7 @@ const policies = [
         provider: "StarHealth",
         category: "health",
         price: 4999,
-        coverage: "₹3,00,000 hospitalization cover",
+        coverage: 300000,
         features: [
             "Cashless hospitalization",
             "Pre & Post hospitalization",
@@ -100,7 +100,7 @@ const policies = [
         provider: "StarHealth",
         category: "health",
         price: 9999,
-        coverage: "₹10,00,000 hospitalization cover",
+        coverage: 1000000,
         features: [
             "Cashless hospitalization",
             "Critical illness cover",
@@ -114,7 +114,7 @@ const policies = [
         provider: "HDFC Ergo",
         category: "health",
         price: 7499,
-        coverage: "₹5,00,000 hospitalization cover",
+        coverage: 500000,
         features: [
             "Cashless at 10,000+ hospitals",
             "AYUSH treatment cover",
@@ -129,7 +129,7 @@ const policies = [
         provider: "LIC",
         category: "life",
         price: 12000,
-        coverage: "₹1,00,00,000 death benefits",
+        coverage: 10000000,
         features: [
             "Pure term insurance",
             "Accidental death benefits rider",
@@ -142,7 +142,7 @@ const policies = [
         provider: "SBI Life",
         category: "life",
         price: 24000,
-        coverage: "₹50,00,000 death benefits",
+        coverage: 5000000,
         features: [
             "Death + maturity benefits",
             "Bonus addtions",
@@ -155,7 +155,7 @@ const policies = [
         provider: "ICICI Prudential",
         category: "life",
         price: 9500,
-        coverage: "₹1,00,00,000 death benefits",
+        coverage: 10000000,
         features: [
             "Terminal illness benefits",
             "Walver of premium rider",
@@ -170,7 +170,7 @@ const policies = [
         provider: "Bajaj Allianz",
         category: "auto",
         price: 8500,
-        coverage: "Own damage + third party liability",
+        coverage: 500000,
         features: [
             "Zero depreciation cover",
             "Roadside assistance 24/7",
@@ -183,7 +183,7 @@ const policies = [
         provider: "IFFCO Tokio",
         category: "auto",
         price: 2200,
-        coverage: "Third party liability only",
+        coverage: 100000,
         features: [
             "Mandatory third party cover",
             "Personal accident cover",
@@ -195,7 +195,7 @@ const policies = [
         provider: "HDFC Ergo",
         category: "auto",
         price: 11000,
-        coverage: "Own damage + third party + add-ons",
+        coverage: 700000,
         features: [
             "Return to invoice cover",
             "Consumables cover",
@@ -211,7 +211,7 @@ const policies = [
         provider: "New India Assurance",
         category: "home",
         price: 3500,
-        coverage: "₹25,00,000",
+        coverage: 2500000,
         features: [
             "Fire and allied perils",
             "Nature disaster cover",
@@ -223,7 +223,7 @@ const policies = [
         provider: "Tata AIG",
         category: "home",
         price: 6800,
-        coverage: "₹50,00,000 structure + contents cover",
+        coverage: 5000000,
         features: [
             "Structure + contents cover",
             "Earthquake cover",
@@ -237,7 +237,7 @@ const policies = [
         provider: "Bajaj Allianz",
         category: "home",
         price: 5200,
-        coverage: "₹40,00,000 structure + valuable cover",
+        coverage: 4000000,
         features: [
             "Structure cover",
             "Jewelry & valuables cover",
