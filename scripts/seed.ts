@@ -1,8 +1,36 @@
 import mongoose from "mongoose";
-import Policy from "@/model/Policy";
+import Policy from "../model/Policy";
+import { InsuranceType } from "../model/Insurance";
 import dotenv from "dotenv"
 
 dotenv.config({path: ".env"})
+
+const insuranceTypes = [
+    {
+        name: "Health",
+        description: "Covers medical expenses, hospitalization, treatment costs, and preventive care."
+    },
+    {
+        name: "Life",
+        description: "Provides financial protection for your family in case of death or critical events."
+    },
+    {
+        name: "Vehicle",
+        description: "Protects cars and bikes against accidents, theft, damage, and third-party liability."
+    },
+    {
+        name: "Home",
+        description: "Covers your house and belongings against fire, theft, natural disasters, and damage."
+    },
+    {
+        name: "Travel",
+        description: "Covers trip cancellations, emergency medical care, lost baggage, and travel delays."
+    },
+    {
+        name: "Term",
+        description: "Offers pure life coverage for a fixed period with a lower annual premium."
+    },
+]
 
 const policies = [
     //health
@@ -175,6 +203,12 @@ async function seed() {
     try {
         await mongoose.connect(process.env.MONGODB_URI as string)
         console.log("Connected to MongoDB")
+
+        await InsuranceType.deleteMany({})
+        console.log("Cleared existing insurance types")
+
+        await InsuranceType.insertMany(insuranceTypes)
+        console.log(`Seeded ${insuranceTypes.length} insurance types successfully`)
 
         await Policy.deleteMany({})
         console.log("Cleared existing policies")
