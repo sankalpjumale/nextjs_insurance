@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
             )
         }
 
-        if(ids.length < 4) {
+        if(ids.length > 4) {
             return NextResponse.json(
                 {success: false, message: "Maximum 4 policies can be compared"},
                 {status: 400}
