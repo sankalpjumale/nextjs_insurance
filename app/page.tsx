@@ -121,10 +121,20 @@ export default function HomePage() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
                       <Link
-                        href="/compare"
+                        href={
+                          category === "health"
+                            ? "/health"
+                            : category === "home"
+                              ? "/home-insurance"
+                              : "/compare"
+                        }
                         className="flex items-center gap-1 text-sm font-semibold text-indigo-600 group-hover:gap-2 transition-all"
                       >
-                        Compare policies
+                        {category === "health"
+                          ? "View health policies"
+                          : category === "home"
+                            ? "View home policies"
+                            : "Compare policies"}
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
