@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { Shield, ArrowRight, TrendingUp } from "lucide-react";
-import { dbConnect } from "@/lib/dbConnect";
-import { InsuranceType } from "@/model/Insurance";
 
 interface InsuranceTypeCard {
   _id: string
@@ -9,15 +7,38 @@ interface InsuranceTypeCard {
   description: string
 }
 
-async function getInsuranceTypes(): Promise<InsuranceTypeCard[]> {
-  try {
-    await dbConnect()
-    const insuranceTypes = await InsuranceType.find({}).sort({name: 1}).lean()
-    return JSON.parse(JSON.stringify(insuranceTypes))
-  } catch {
-    return []
+const insuranceTypes: InsuranceTypeCard[] = [
+  {
+    _id: "health",
+    name: "Health",
+    description: "Covers medical expenses, hospitalization, treatment costs, and preventive care."
+  },
+  {
+    _id: "home",
+    name: "Home",
+    description: "Covers your house and belongings against fire, theft, natural disasters, and damage."
+  },
+  {
+    _id: "life",
+    name: "Life",
+    description: "Provides financial protection for your family in case of death or critical events."
+  },
+  {
+    _id: "term",
+    name: "Term",
+    description: "Offers pure life coverage for a fixed period with a lower annual premium."
+  },
+  {
+    _id: "travel",
+    name: "Travel",
+    description: "Covers trip cancellations, emergency medical care, lost baggage, and travel delays."
+  },
+  {
+    _id: "vehicle",
+    name: "Vehicle",
+    description: "Protects cars and bikes against accidents, theft, damage, and third-party liability."
   }
-}
+]
 
 const categoryColors: Record<string, {bg: string; text: string; dot: string}> = {
   health: {bg: "bg-emerald-50", text: "text-emerald-700", dot: "dot-emerald-400"},
@@ -29,9 +50,7 @@ const categoryColors: Record<string, {bg: string; text: string; dot: string}> = 
   default: {bg: "bg-slate-50", text: "text-slate-700", dot: "dot-slate-400"}
 }
 
-export default async function HomePage() {
-  const insuranceTypes = await getInsuranceTypes()
-
+export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#f7f5f0]">
 
