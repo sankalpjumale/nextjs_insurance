@@ -60,19 +60,19 @@ const insuranceRoutes: Record<string, {href: string; text: string}> = {
     text: "View home policies"
   },
   life: {
-    href: "/life-insurance",
+    href: "/life",
     text: "View life policies"
   },
   term: {
-    href: "/term-insurance",
+    href: "/term",
     text: "View term policies"
   },
   travel: {
-    href: "/travel-insurance",
+    href: "/travel",
     text: "View travel policies"
   },
   vehicle: {
-    href: "/vehicle-insurance",
+    href: "/vehicle",
     text: "View vehicle policies"
   }
 }
