@@ -5,7 +5,7 @@ export default function Loading() {
         <main className="min-h-screen bg-[#f7f5f0] flex items-center justify-center">
             <div className="flex items-center gap-3 text-stone-400">
                 <Loader2 className="w-5 h-5 animate-spin" />
-                <span className="text-sm">Loading life policies...</span>
+                <span className="text-sm">Loading travel policies...</span>
             </div>
         </main>
     )

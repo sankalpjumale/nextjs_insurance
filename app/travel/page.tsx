@@ -13,7 +13,7 @@ interface Policy {
     description?: string
 }
 
-export default async function LifePolicyPage() {
+export default async function TravelPolicyPage() {
     const policies = await getPoliciesByCategory("life") as Policy[]
 
   return (
