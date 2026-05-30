@@ -50,6 +50,33 @@ const categoryColors: Record<string, {bg: string; text: string; dot: string}> = 
   default: {bg: "bg-slate-50", text: "text-slate-700", dot: "dot-slate-400"}
 }
 
+const insuranceRoutes: Record<string, {href: string; text: string}> = {
+   health: {
+    href: "/health",
+    text: "View health policies"
+  },
+  home: {
+    href: "/home-insurance",
+    text: "View home policies"
+  },
+  life: {
+    href: "/life-insurance",
+    text: "View life policies"
+  },
+  term: {
+    href: "/term-insurance",
+    text: "View term policies"
+  },
+  travel: {
+    href: "/travel-insurance",
+    text: "View travel policies"
+  },
+  vehicle: {
+    href: "/vehicle-insurance",
+    text: "View vehicle policies"
+  }
+}
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#f7f5f0]">
@@ -101,6 +128,11 @@ export default function HomePage() {
             {insuranceTypes.map((type: InsuranceTypeCard) => {
               const category = type.name.toLowerCase()
               const cate = categoryColors[category] ?? categoryColors.default
+
+              const route = insuranceRoutes[category] ?? {
+                href: "/compare",
+                text: 'Compare policies'
+              }
               return (
                 <div
                   key={type._id}
@@ -120,7 +152,7 @@ export default function HomePage() {
                     <p className="text-sm text-stone-500 leading-relaxed mb-6 flex-1">{type.description}</p>
 
                     <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
-                      <Link
+                      {/* <Link
                         href={
                           category === "health"
                             ? "/health"
@@ -135,6 +167,14 @@ export default function HomePage() {
                           : category === "home"
                             ? "View home policies"
                             : "Compare policies"}
+                        <ArrowRight className="w-4 h-4" />
+                      </Link> */}
+
+                      <Link 
+                        href={route.href}
+                        className="flex items-center gap-1 text-sm font-semibold text-indigo-600 group-hover:gap-2 transition-all"
+                      >
+                        {route.text}
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
