@@ -18,7 +18,7 @@ export default async function VehiclePolicyPage() {
 
   return (
     <main className="min-h-screen bg-[#f7f5f0]">
-        <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        {/* <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <Shield className="w-6 h-6 text-indigo-600" strokeWidth={2.5} />
@@ -37,7 +37,7 @@ export default async function VehiclePolicyPage() {
                         Back to home
                     </Link>
                 </div>
-        </nav>
+        </nav> */}
 
         <section className="max-w-7xl mx-auto px-6 pt-14 pb-10">
             <div className="max-w-3xl">
@@ -47,14 +47,14 @@ export default async function VehiclePolicyPage() {
                 </div>
 
                 <h1
-                        className="text-4xl sm:text-5xl font-bold text-stone-900 leading-tight mb-4"
-                        style={{fontFamily: "'Playfair Display', serif"}}
+                    className="text-4xl sm:text-5xl font-bold text-stone-900 leading-tight mb-4"
+                    style={{fontFamily: "'Playfair Display', serif"}}
                 >
                     Vehicle Policies
                 </h1>
 
                 <p className="text-stone-500 text-base sm:text-lg leading-relaxed">
-                        Review Vehicle insurance plans with premiums, coverage amounts, and the benefits included in each policy.
+                    Review Vehicle insurance plans with premiums, coverage amounts, and the benefits included in each policy.
                 </p>
             </div>
         </section>

@@ -244,7 +244,7 @@ export default function ComparePage() {
     return (
         <main className="min-h-screen bg-[#f7f5f0]">
             {/* Navbar */}
-            <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+            {/* <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <Shield className="w-6 h-6 text-indigo-600" strokeWidth={2.5} />
@@ -263,7 +263,7 @@ export default function ComparePage() {
                         Back to policies
                     </Link>
                 </div>
-            </nav>
+            </nav> */}
  
             <div className="max-w-7xl mx-auto px-6 py-12">
                 {/* Header */}
