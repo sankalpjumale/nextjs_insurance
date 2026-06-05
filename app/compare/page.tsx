@@ -1,10 +1,9 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useAuth } from "@clerk/nextjs"
 import {
-    Shield,
-    ArrowLeft,
     Plus,
     X,
     CheckCircle2,
@@ -189,12 +188,21 @@ function CompareRow({
  
 // Main page
 export default function ComparePage() {
+    const router = useRouter()
+    const {isLoaded, isSignedIn} = useAuth()
     const [allPolicies, setAllPolicies] = useState<Policy[]>([])
     const [slots, setSlots] = useState<(Policy | null)[]>([null, null])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
  
     useEffect(() => {
+        if(!isLoaded) return
+
+        if(!isSignedIn) {
+            router.replace("/sign-in")
+            return
+        }
+
         async function fetchPolicies() {
             try {
                 const res = await fetch("/api/policies")
@@ -207,7 +215,7 @@ export default function ComparePage() {
             }
         }
         fetchPolicies()
-    }, [])
+    }, [isLoaded, isSignedIn, router])
  
     const handleSelect = useCallback((policy: Policy, slotIndex: number) => {
         setSlots((prev) => {
