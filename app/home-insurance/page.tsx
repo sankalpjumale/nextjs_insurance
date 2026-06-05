@@ -1,3 +1,5 @@
+import { auth } from "@clerk/nextjs/server" 
+import {redirect} from "next/navigation" 
 import Link from "next/link"
 import { Activity, ArrowLeft, ArrowRight, CheckCircle2, Home, Shield } from "lucide-react"
 import { getPoliciesByCategory } from "@/lib/actions/policy.actions"
@@ -14,6 +16,13 @@ interface Policy {
 }
 
 export default async function HomeInsurancePoliciesPage() {
+
+    const {userId} = await auth()
+
+    if(!userId) {
+        redirect("/sign-in")
+    }
+
     const policies = await getPoliciesByCategory("home") as Policy[]
 
     return (
