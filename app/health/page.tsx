@@ -1,3 +1,5 @@
+import {auth} from "@clerk/nextjs/server"
+import {redirect} from "next/navigation"
 import Link from "next/link"
 import { Activity, ArrowLeft, ArrowRight, CheckCircle2, HeartPulse, Shield } from "lucide-react"
 import { getPoliciesByCategory } from "@/lib/actions/policy.actions"
@@ -14,6 +16,13 @@ interface Policy {
 }
 
 export default async function HealthPoliciesPage() {
+
+    const {userId} = await auth()
+
+    if(!userId) {
+        redirect("/sign-in")
+    }
+    
     const policies = await getPoliciesByCategory("health") as Policy[]
 
     return (
