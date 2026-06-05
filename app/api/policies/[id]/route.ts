@@ -1,9 +1,11 @@
 import { dbConnect } from "@/lib/dbConnect";
 import Policy from "@/model/Policy";
+import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(_req: NextRequest, {params}: {params: Promise<{id: string}>}) {
     try {
+        await auth.protect()
         await dbConnect()
         const {id} = await params
 
