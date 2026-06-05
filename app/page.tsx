@@ -1,5 +1,7 @@
+'use client'
 import Link from "next/link";
 import { Shield, ArrowRight, TrendingUp } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 interface InsuranceTypeCard {
   _id: string
@@ -78,6 +80,8 @@ const insuranceRoutes: Record<string, {href: string; text: string}> = {
 }
 
 export default function HomePage() {
+  const {isSignedIn} = useAuth()
+
   return (
     <main className="min-h-screen bg-[#f7f5f0]">
 
