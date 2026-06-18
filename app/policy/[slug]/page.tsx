@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { Shield, CheckCircle, XCircle, FileText, HelpCircle, BookOpen, AlertTriangle } from "lucide-react"
 import CategoryBadge from "@/components/category_badge/CategoryBadge"
 import SectionLabel from "@/components/section_label/SectionLabel"
-// import { PolicyDetailTabs } from "@/components/"
+import {PolicyDetailTabs} from "@/components/policy_detail_tabs/PolicyDetailTabs"
 
 async function getPolicy(slug: string) {
   try {
@@ -96,7 +96,7 @@ export default async function PolicyDetailPage({
 
       {/* Tabbed Detail Section */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
-        {/* <PolicyDetailTabs policy={policy} /> */}
+        <PolicyDetailTabs policy={policy} />
       </section>
     </main>
   )
