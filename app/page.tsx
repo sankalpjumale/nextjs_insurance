@@ -80,29 +80,10 @@ const insuranceRoutes: Record<string, {href: string; text: string}> = {
 }
 
 export default function HomePage() {
-  const {isSignedIn} = useAuth()
+  // const {isSignedIn} = useAuth()
 
   return (
     <main className="min-h-screen bg-[#f7f5f0]">
-
-      {/* navbar */}
-      {/* <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Shield className="w-6 h-6 text-indigo-600" strokeWidth={2.5}/>
-            <span className="font-bold text-xl tracking-tight text-stone-900" style={{fontFamily :"'Playfair Display', serif"}}>PolicyLens</span>
-          </div>
-
-          <Link 
-            href={"/compare"} 
-            className="flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
-          >
-            Compare policies
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-
-        </div>
-      </nav> */}
 
       {/* hero */}
       <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
@@ -156,24 +137,6 @@ export default function HomePage() {
                     <p className="text-sm text-stone-500 leading-relaxed mb-6 flex-1">{type.description}</p>
 
                     <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
-                      {/* <Link
-                        href={
-                          category === "health"
-                            ? "/health"
-                            : category === "home"
-                              ? "/home-insurance"
-                              : "/compare"
-                        }
-                        className="flex items-center gap-1 text-sm font-semibold text-indigo-600 group-hover:gap-2 transition-all"
-                      >
-                        {category === "health"
-                          ? "View health policies"
-                          : category === "home"
-                            ? "View home policies"
-                            : "Compare policies"}
-                        <ArrowRight className="w-4 h-4" />
-                      </Link> */}
-
                       <Link 
                         href={route.href}
                         className="flex items-center gap-1 text-sm font-semibold text-indigo-600 group-hover:gap-2 transition-all"
@@ -190,7 +153,6 @@ export default function HomePage() {
           </div>
         )}
       </section>
-
     </main>
   )
 }
