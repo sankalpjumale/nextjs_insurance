@@ -6,7 +6,7 @@ interface DefinitionCardProps {
   query?: string
 }
 
-export function DefinitionCard({ definition, query = "" }: DefinitionCardProps) {
+export default function DefinitionCard({ definition, query = "" }: DefinitionCardProps) {
   return (
     <div className="bg-white rounded-2xl border border-stone-100 p-5 flex flex-col gap-2">
       <p className="text-sm font-bold text-indigo-700">
