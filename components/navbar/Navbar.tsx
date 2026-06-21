@@ -1,63 +1,50 @@
-// 'use client'
-
-// import Link from "next/link"
-// import {Shield, ArrowLeft, ArrowRight} from 'lucide-react'
-// import { usePathname } from "next/navigation"
-
-// export default function Navbar() {
-//     const pathname = usePathname()
-//     const isHomePage = pathname === "/"
-
-//     return (
-//         <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-//             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-//                 <div className="flex items-center gap-2">
-//                     <Shield className="w-6 h-6 text-indigo-600" strokeWidth={2.5} />
-//                     <span
-//                         className="font-bold text-xl tracking-tight text-stone-900"
-//                         style={{ fontFamily: "'Playfair Display', serif" }}
-//                     >
-//                         PolicyLens
-//                     </span>
-//                 </div>
-
-//                 {isHomePage ? (
-//                     <Link
-//                         href="/compare"
-//                         className="flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
-//                     >
-//                         Compare policies
-//                         <ArrowRight className="w-4 h-4" />
-//                     </Link>
-//                 ) : (
-//                     <Link
-//                         href="/"
-//                         className="flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors"
-//                     >
-//                         <ArrowLeft className="w-4 h-4" />
-//                         Back to home
-//                     </Link>
-//                 )}
-//             </div>
-//         </nav>
-//     )
-// }
-
+'use client'
 
 import Link from "next/link"
-import { Shield } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Shield, Search } from "lucide-react"
+
+const NAV_LINKS = [
+  { href: "/categories", label: "Browse" },
+  { href: "/search",     label: "Search" },
+]
 
 export function Navbar() {
+  const pathname = usePathname()
+
   return (
     <nav className="sticky top-0 z-50 bg-[#f7f5f0]/80 backdrop-blur border-b border-stone-200">
       <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 text-stone-900 font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-stone-900 font-bold text-lg"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
           <Shield className="w-5 h-5 text-indigo-600" />
           PolicyLens
         </Link>
-        <div className="flex items-center gap-6 text-sm font-medium text-stone-500">
-          <Link href="/categories" className="hover:text-stone-900 transition-colors">Browse</Link>
-          <Link href="/search" className="hover:text-stone-900 transition-colors">Search</Link>
+
+        <div className="flex items-center gap-1">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                pathname.startsWith(link.href)
+                  ? "bg-indigo-50 text-indigo-700"
+                  : "text-stone-500 hover:text-stone-900 hover:bg-stone-100"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/search"
+            className="ml-2 p-2 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors"
+            aria-label="Search"
+          >
+            <Search className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </nav>
