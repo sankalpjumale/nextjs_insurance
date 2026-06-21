@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { CategoryBadge } from "@/components/category_badge"
-import { HighlightText } from "@/components/"
+import CategoryBadge from "@/components/category_badge/CategoryBadge"
+import HighlightText from "@/components/policy/HighlightText"
 import { PolicySummary } from "@/lib/search"
 
 interface SearchResultCardProps {

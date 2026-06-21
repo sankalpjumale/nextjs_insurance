@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { ArrowRight, LayoutGrid } from "lucide-react"
-import { SectionLabel } from "@/components/ui/SectionLabel"
+import SectionLabel from "@/components/section_label/SectionLabel"
 import Header from "@/components/header/Header"
-import { CategoryBadge } from "@/components/ui/CategoryBadge"
-import { EmptyState } from "@/components/ui/EmptyState"
+import CategoryBadge from "@/components/category_badge/CategoryBadge"
+import EmptyState from "@/components/empty_state/EmptyState"
 
 async function getCategories() {
   try {
@@ -24,7 +24,7 @@ export default async function CategoriesPage() {
   return (
     <main className="min-h-screen">
       <section className="max-w-7xl mx-auto px-6 pt-14 pb-10">
-        <PageHeader
+        <Header
           label={<SectionLabel text="All Categories" icon={<LayoutGrid className="w-3.5 h-3.5" />} />}
           title="Browse by insurance"
           titleHighlight="category."

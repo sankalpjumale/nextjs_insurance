@@ -1,8 +1,8 @@
 import { PolicySummary } from "@/lib/search"
 import { SearchResultCard } from "@/components/search/SearchResultCard"
 import { DefinitionHitCard } from "@/components/search/DefinitionHitCard"
-import { CountPill } from "@/components/"
-import { EmptyState } from "@/components/ui/EmptyState"
+import CountPill from "@/components/policy/CountPill"
+import EmptyState from "@/components/empty_state/EmptyState"
 import { Search } from "lucide-react"
 
 interface DefinitionHit {

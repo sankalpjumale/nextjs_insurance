@@ -1,7 +1,7 @@
 
 import { Suspense } from "react"
 import { TrendingUp } from "lucide-react"
-import { SectionLabel } from "@/components/policy/"
+import SectionLabel from "@/components/section_label/SectionLabel"
 import Header from "@/components/header/Header"
 import { SearchBar } from "@/components/search/SearchBar"
 import { FilterBar } from "@/components/search/FIlterBar"
@@ -57,7 +57,7 @@ export default async function SearchPage({
   return (
     <main className="min-h-screen">
       <section className="max-w-7xl mx-auto px-6 pt-14 pb-8">
-        <PageHeader
+        <Header
           label={<SectionLabel text="Search & Discover" icon={<TrendingUp className="w-3.5 h-3.5" />} />}
           title="Find the right"
           titleHighlight="coverage."

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { BookOpen } from "lucide-react"
-import { HighlightText } from "@/components/policy/shared/HighlightText"
+import HighlightText from "@/components/policy/HighlightText"
 
 interface DefinitionHit {
   policyName: string
