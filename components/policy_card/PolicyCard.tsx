@@ -1,7 +1,7 @@
-import React from 'react'
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import  CategoryBadge  from "@/components/category_badge/CategoryBadge"
+import CategoryBadge from "@/components/category_badge/CategoryBadge"
+import { AddToCompareButton } from "@/components/compare/AddToCompareButton"
 
 interface PolicyCardProps {
   name: string
@@ -16,8 +16,8 @@ interface PolicyCardProps {
   currency: string
 }
 
-function PolicyCard({
-    name,
+export function PolicyCard({
+  name,
   slug,
   categorySlug,
   insurerName,
@@ -29,7 +29,7 @@ function PolicyCard({
   currency,
 }: PolicyCardProps) {
   return (
-     <div className="group bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
+    <div className="group bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col">
       <div className="h-1.5 w-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="p-6 flex flex-col flex-1">
@@ -38,12 +38,14 @@ function PolicyCard({
           <span className="text-xs text-stone-400 font-medium">{coverageType}</span>
         </div>
 
-        <h2
-          className="text-xl font-bold text-stone-900 mb-1 group-hover:text-indigo-700 transition-colors"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          {name}
-        </h2>
+        <Link href={`/policies/${slug}`}>
+          <h2
+            className="text-xl font-bold text-stone-900 mb-1 group-hover:text-indigo-700 transition-colors"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            {name}
+          </h2>
+        </Link>
         <p className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-3">{insurerName}</p>
 
         {tagline && (
@@ -61,24 +63,24 @@ function PolicyCard({
           </ul>
         )}
 
-        <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
-          <div>
+        <div className="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto gap-3">
+          <div className="min-w-0">
             <p className="text-xs text-stone-400">Sum Insured</p>
-            <p className="text-sm font-semibold text-stone-700">
+            <p className="text-sm font-semibold text-stone-700 truncate">
               {currency} {minSumInsured.toLocaleString()} – {maxSumInsured.toLocaleString()}
             </p>
           </div>
-          <Link
-            href={`/policies/${slug}`}
-            className="flex items-center gap-1 text-sm font-semibold text-indigo-600 group-hover:gap-2 transition-all"
-          >
-            View policy
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="flex items-center gap-2 shrink-0">
+            <AddToCompareButton slug={slug} name={name} />
+            <Link
+              href={`/policies/${slug}`}
+              className="flex items-center gap-1 text-sm font-semibold text-indigo-600 group-hover:gap-2 transition-all"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   )
 }
-
-export default PolicyCard
