@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
+import {Navbar} from "@/components/navbar/Navbar";
+import {Footer} from "@/components/footer/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ComparisonBar } from "@/components/compare/ComparisonBar";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -19,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PolicyLens",
+  title: "PolicyLens - Understand Insurance Clearly",
   description: "Compare insurance policies and review coverage, premiums, and benefits.",
 };
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <ComparisonBar />
         </body>
       </html>
   );
