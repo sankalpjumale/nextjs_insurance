@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run seed && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "seed": "ts-node --project tsconfig.seed.json scripts/seed.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.4.2",
@@ -37,6 +36,7 @@
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import CategoryBadge from "@/components/category_badge/CategoryBadge"
+import {CategoryBadge} from "@/components/category_badge/CategoryBadge"
 import { AddToCompareButton } from "@/components/compare/AddToCompareButton"
 
 interface PolicyCardProps {
