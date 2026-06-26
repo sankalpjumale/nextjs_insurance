@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
+    <ClerkProvider>
       <html
         lang="en"
         className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
@@ -42,5 +42,6 @@ export default function RootLayout({
           <ComparisonBar />
         </body>
       </html>
+    </ClerkProvider>
   );
 }
