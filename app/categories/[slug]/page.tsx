@@ -89,24 +89,70 @@ import SectionLabel from "@/components/section_label/SectionLabel"
 import Header from "@/components/header/Header"
 import EmptyState from "@/components/empty_state/EmptyState"
 import { PolicyCard } from "@/components/policy_card/PolicyCard"
+import { dbConnect } from "@/lib/dbConnect"
+import Policy from "@/model/Policy"
 
 // Tells Next.js which slugs are valid at build time
 export function generateStaticParams() {
   return CATEGORIES.map((cat) => ({ slug: cat.slug }))
 }
 
+// async function getPolicies(categorySlug: string) {
+//   try {
+
+//     await dbConnect()
+
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_APP_URL}/api/policies?category=${categorySlug}`,
+//       { next: { revalidate: 3600 } }
+//     )
+//     if (!res.ok) return []
+//     const json = await res.json()
+//     return json.data ?? []
+//   } catch {
+//     return []
+//   }
+// }
+
+// async function getPolicies(categorySlug: string) {
+//   await dbConnect()
+//   const policies = await Policy.find({ 
+//     categorySlug, 
+//     isActive: true 
+//   })
+//   .select("name slug categorySlug insurerName insurerLogo tagline policyType coverageType minSumInsured maxSumInsured currency highlights isFeatured displayOrder")
+//   .sort({ displayOrder: 1 })
+//   .lean()
+  
+//   return JSON.parse(JSON.stringify(policies)) // serialize for client
+// }
+
+// async function getPolicies(categorySlug: string) {
+//   await dbConnect()
+//   const policies = await Policy.find({ 
+//     categorySlug, 
+//     isActive: true 
+//   }).lean()
+  
+//   console.log("categorySlug received:", categorySlug)
+//   console.log("policies found:", policies.length)
+//   console.log("first policy:", policies[0])
+  
+//   return JSON.parse(JSON.stringify(policies))
+// }
+
 async function getPolicies(categorySlug: string) {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/policies?category=${categorySlug}`,
-      { next: { revalidate: 3600 } }
-    )
-    if (!res.ok) return []
-    const json = await res.json()
-    return json.data ?? []
-  } catch {
-    return []
-  }
+  await dbConnect()
+  
+  // Add this
+  console.log("DB URI:", process.env.MONGODB_URI)
+  console.log("Total policies in DB:", await Policy.countDocuments())
+  console.log("All categoryslugs:", await Policy.distinct("categorySlug"))
+  
+  const policies = await Policy.find({ categorySlug, isActive: true }).lean()
+  console.log("policies found:", policies.length)
+  
+  return JSON.parse(JSON.stringify(policies))
 }
 
 export default async function CategoryPage({

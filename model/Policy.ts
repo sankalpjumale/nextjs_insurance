@@ -332,7 +332,7 @@ const PolicySchema = new Schema<IPolicy>(
   }
 );
  
-PolicySchema.index({ slug: 1 });
+// PolicySchema.index({ slug: 1 });
 PolicySchema.index({ categorySlug: 1, isActive: 1, displayOrder: 1 });
 PolicySchema.index({ isFeatured: 1 });
 PolicySchema.index({ insurerName: 1 });
