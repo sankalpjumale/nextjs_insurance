@@ -95,41 +95,73 @@
 // }
 
 
+// import { Suspense } from "react"
+// import { Scale } from "lucide-react"
+// import SectionLabel from "@/components/section_label/SectionLabel"
+// import Header from "@/components/header/Header"
+// import { SearchPageClient } from "@/components/search/SearchPageClient"
+// import categories from "@/config/categories"
+
+// // async function getCategories() {
+// //   try {
+// //     const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, {
+// //       next: { revalidate: 3600 },
+// //     })
+// //     if (!res.ok) return []
+// //     const json = await res.json()
+// //     return json.data ?? []
+// //   } catch {
+// //     return []
+// //   }
+// // }
+
+// export default async function SearchPage() {
+//   const categories = await getCategories()
+
+//   return (
+//     <main className="min-h-screen">
+//       <section className="max-w-7xl mx-auto px-6 pt-14 pb-8">
+//         <Header
+//           label={<SectionLabel text="Search & Discover" />}
+//           title="Find the right"
+//           titleHighlight="coverage."
+//           subtitle="Search across all policies, insurers, and glossary terms."
+//         />
+//       </section>
+
+//       <Suspense fallback={<div className="max-w-7xl mx-auto px-6 py-10 text-sm text-stone-400">Loading...</div>}>
+//         <SearchPageClient categories={categories} />
+//       </Suspense>
+//     </main>
+//   )
+// }
+
 import { Suspense } from "react"
-import { Scale } from "lucide-react"
 import SectionLabel from "@/components/section_label/SectionLabel"
 import Header from "@/components/header/Header"
 import { SearchPageClient } from "@/components/search/SearchPageClient"
+import {CATEGORIES} from "@/config/categories"
 
-async function getCategories() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, {
-      next: { revalidate: 3600 },
-    })
-    if (!res.ok) return []
-    const json = await res.json()
-    return json.data ?? []
-  } catch {
-    return []
-  }
-}
-
-export default async function SearchPage() {
-  const categories = await getCategories()
-
+export default function SearchPage() {
   return (
     <main className="min-h-screen">
       <section className="max-w-7xl mx-auto px-6 pt-14 pb-8">
         <Header
-          label={<SectionLabel text="Search & Discover" />}
           title="Find the right"
           titleHighlight="coverage."
           subtitle="Search across all policies, insurers, and glossary terms."
+          label={<SectionLabel text="Search & Discover" />}
         />
       </section>
 
-      <Suspense fallback={<div className="max-w-7xl mx-auto px-6 py-10 text-sm text-stone-400">Loading...</div>}>
-        <SearchPageClient categories={categories} />
+      <Suspense
+        fallback={
+          <div className="max-w-7xl mx-auto px-6 py-10 text-sm text-stone-400">
+            Loading...
+          </div>
+        }
+      >
+        <SearchPageClient categories={CATEGORIES} />
       </Suspense>
     </main>
   )

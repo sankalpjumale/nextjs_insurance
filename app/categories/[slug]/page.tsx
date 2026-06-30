@@ -82,20 +82,20 @@
 // }
 
 
-import { notFound } from "next/navigation"
-import { Shield } from "lucide-react"
-import { CATEGORIES, getCategoryBySlug } from "@/config/categories"
-import SectionLabel from "@/components/section_label/SectionLabel"
-import Header from "@/components/header/Header"
-import EmptyState from "@/components/empty_state/EmptyState"
-import { PolicyCard } from "@/components/policy_card/PolicyCard"
-import { dbConnect } from "@/lib/dbConnect"
-import Policy from "@/model/Policy"
+// import { notFound } from "next/navigation"
+// import { Shield } from "lucide-react"
+// import { CATEGORIES, getCategoryBySlug } from "@/config/categories"
+// import SectionLabel from "@/components/section_label/SectionLabel"
+// import Header from "@/components/header/Header"
+// import EmptyState from "@/components/empty_state/EmptyState"
+// import { PolicyCard } from "@/components/policy_card/PolicyCard"
+// import { dbConnect } from "@/lib/dbConnect"
+// import Policy from "@/model/Policy"
 
 // Tells Next.js which slugs are valid at build time
-export function generateStaticParams() {
-  return CATEGORIES.map((cat) => ({ slug: cat.slug }))
-}
+// export function generateStaticParams() {
+//   return CATEGORIES.map((cat) => ({ slug: cat.slug }))
+// }
 
 // async function getPolicies(categorySlug: string) {
 //   try {
@@ -141,18 +141,88 @@ export function generateStaticParams() {
 //   return JSON.parse(JSON.stringify(policies))
 // }
 
+// async function getPolicies(categorySlug: string) {
+//   await dbConnect()
+  
+//   // Add this
+//   console.log("DB URI:", process.env.MONGODB_URI)
+//   console.log("Total policies in DB:", await Policy.countDocuments())
+//   console.log("All categoryslugs:", await Policy.distinct("categorySlug"))
+  
+//   const policies = await Policy.find({ categorySlug, isActive: true }).lean()
+//   console.log("policies found:", policies.length)
+  
+//   return JSON.parse(JSON.stringify(policies))
+// }
+
+// export default async function CategoryPage({
+//   params,
+// }: {
+//   params: Promise<{ slug: string }>
+// }) {
+//   const { slug } = await params
+//   const category = getCategoryBySlug(slug)
+
+//   if (!category) notFound()
+
+//   const policies = await getPolicies(slug)
+
+//   return (
+//     <main className="min-h-screen">
+//       <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
+//         <Header
+//           label={<SectionLabel text={category.name} />}
+//           title={`${category.name} Insurance`}
+//           titleHighlight="policies."
+//           subtitle={category.description}
+//         />
+//       </section>
+
+//       <section className="max-w-7xl mx-auto px-6 pb-20">
+//         <div className="flex items-center justify-between mb-8">
+//           <p className="text-sm text-stone-400 font-medium">
+//             {policies.length} {policies.length === 1 ? "policy" : "policies"} found
+//           </p>
+//         </div>
+
+//         {policies.length === 0 ? (
+//           <EmptyState
+//             title="No policies in this category yet"
+//             subtitle="Insert a policy via the extract script to see it here."
+//             icon={<Shield className="w-12 h-12" />}
+//           />
+//         ) : (
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+//             {policies.map((policy: any) => (
+//               <PolicyCard key={policy._id} {...policy} />
+//             ))}
+//           </div>
+//         )}
+//       </section>
+//     </main>
+//   )
+// }
+
+import { notFound } from "next/navigation"
+import SectionLabel from "@/components/section_label/SectionLabel"
+import PageHeader from "@/components/header/Header"
+import EmptyState from "@/components/empty_state/EmptyState"
+import { PolicyCard } from "@/components/policy_card/PolicyCard"
+import { Shield } from "lucide-react"
+import { CATEGORIES } from "@/config/categories"
+
 async function getPolicies(categorySlug: string) {
-  await dbConnect()
-  
-  // Add this
-  console.log("DB URI:", process.env.MONGODB_URI)
-  console.log("Total policies in DB:", await Policy.countDocuments())
-  console.log("All categoryslugs:", await Policy.distinct("categorySlug"))
-  
-  const policies = await Policy.find({ categorySlug, isActive: true }).lean()
-  console.log("policies found:", policies.length)
-  
-  return JSON.parse(JSON.stringify(policies))
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/policies?category=${categorySlug}`,
+      { next: { revalidate: 3600 } }
+    )
+    if (!res.ok) return []
+    const json = await res.json()
+    return json.data ?? []
+  } catch {
+    return []
+  }
 }
 
 export default async function CategoryPage({
@@ -161,8 +231,8 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const category = getCategoryBySlug(slug)
 
+  const category = CATEGORIES.find((c) => c.slug === slug)
   if (!category) notFound()
 
   const policies = await getPolicies(slug)
@@ -170,7 +240,7 @@ export default async function CategoryPage({
   return (
     <main className="min-h-screen">
       <section className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-        <Header
+        <PageHeader
           label={<SectionLabel text={category.name} />}
           title={`${category.name} Insurance`}
           titleHighlight="policies."
@@ -188,7 +258,7 @@ export default async function CategoryPage({
         {policies.length === 0 ? (
           <EmptyState
             title="No policies in this category yet"
-            subtitle="Insert a policy via the extract script to see it here."
+            subtitle="Add policies via the seed script to see them here."
             icon={<Shield className="w-12 h-12" />}
           />
         ) : (

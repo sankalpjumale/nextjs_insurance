@@ -4,13 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     await dbConnect();
 
+    const { slug } = await params;
+
     const policy = await Policy.findOne({
-      slug: params.slug,
+      slug,
       isActive: true,
     }).lean();
 
@@ -23,6 +25,7 @@ export async function GET(
 
     return NextResponse.json({ success: true, data: policy }, { status: 200 });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { success: false, error: "Failed to fetch policy" },
       { status: 500 }

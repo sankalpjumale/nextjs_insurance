@@ -9,6 +9,7 @@ export interface CategoryConfig {
   }
 }
 
+//for home page and renders the full list directly
 export const CATEGORIES: CategoryConfig[] = [
   {
     name: "Health",
@@ -61,13 +62,15 @@ export const CATEGORIES: CategoryConfig[] = [
   },
 ]
 
-// Lookup helpers used throughout the app
+//need to resolve one category from a route param category/[slug]/page.tsx
 export const getCategoryBySlug = (slug: string): CategoryConfig | undefined =>
   CATEGORIES.find((c) => c.slug === slug)
 
+//need to resolve one category from a route param category/[slug]/page.tsx. avoid re-fetching/passing the whole category object
 export const getCategoryName = (slug: string): string =>
   getCategoryBySlug(slug)?.name ?? slug
 
+// avoid re-fetching/passing the whole category object
 export const getCategoryBadge = (slug: string) =>
   getCategoryBySlug(slug)?.badge ?? {
     bg: "bg-slate-50",
