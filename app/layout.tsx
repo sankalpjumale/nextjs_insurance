@@ -42,6 +42,6 @@ export default function RootLayout({
           <ComparisonBar />
         </body>
       </html>
-    // </ClerkProvider>
+    </ClerkProvider>
   );
 }

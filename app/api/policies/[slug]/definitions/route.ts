@@ -4,16 +4,17 @@ import { dbConnect } from "@/lib/dbConnect";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     await dbConnect();
 
+    const {slug} = await params
     const { searchParams } = new URL(request.url);
     const search = searchParams.get("search");
 
     const policy = await Policy.findOne(
-      { slug: params.slug, isActive: true },
+      { slug, isActive: true },
       { definitions: 1 }
     ).lean();
 
