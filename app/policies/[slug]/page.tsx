@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
-import { Shield, CheckCircle, XCircle, FileText, HelpCircle, BookOpen, AlertTriangle } from "lucide-react"
-import {CategoryBadge} from "@/components/category_badge/CategoryBadge"
-import SectionLabel from "@/components/section_label/SectionLabel"
+import { Shield, CheckCircle } from "lucide-react"
+import CategoryBadge from "@/components/category_badge/CategoryBadge"
 import {PolicyDetailTabs} from "@/components/policy_detail_tabs/PolicyDetailTabs"
 
 async function getPolicy(slug: string) {
