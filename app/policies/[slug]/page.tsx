@@ -2,16 +2,22 @@ import { notFound } from "next/navigation"
 import { Shield, CheckCircle } from "lucide-react"
 import CategoryBadge from "@/components/category_badge/CategoryBadge"
 import {PolicyDetailTabs} from "@/components/policy_detail_tabs/PolicyDetailTabs"
+import { dbConnect } from "@/lib/dbConnect"
+import Policy from "@/model/Policy"
 
 async function getPolicy(slug: string) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/policies/${slug}`,
-      { next: { revalidate: 3600 } }
-    )
-    if (!res.ok) return null
-    const json = await res.json()
-    return json.data ?? null
+    // const res = await fetch(
+    //   `${process.env.NEXT_PUBLIC_APP_URL}/api/policies/${slug}`,
+    //   { next: { revalidate: 3600 } }
+    // )
+    // if (!res.ok) return null
+    // const json = await res.json()
+    // return json.data ?? null
+
+    await dbConnect()
+    const policy = await Policy.findOne({slug, isActive: true}).lean()
+    return policy ?? null
   } catch {
     return null
   }
