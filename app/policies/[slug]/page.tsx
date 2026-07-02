@@ -20,7 +20,8 @@ async function getPolicy(slug: string) {
     if(!policy) return null
     return JSON.parse(JSON.stringify(policy)) //strips all mongodb specific types
     //lean() still returns ObjectId and Date objects which Next.js blocks from being passed to client components. added JSON.parse/stringify to convert the policy document into a plain object after DB query.
-  } catch {
+  } catch (error){
+    console.error("getPolicy error: ", error)
     return null
   }
 }
